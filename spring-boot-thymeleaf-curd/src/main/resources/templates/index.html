@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Product | CURD</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" type="text/css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<section class="content">
+			<div class="container-fluid">
+				<br> <br>
+				<div class="row clearfix">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div th:if="${success != null}">
+							<div class="alert alert-success">
+								<strong th:text="${success}"></strong>
+							</div>
+						</div>
+						<form action="#" th:action="@{/product}" th:object="${product}"
+							method="POST">
+							<input type="hidden" id="id" th:field="*{id}">
+							<div class="form-group">
+								<input type="text" class="form-control" id="produtName"
+									th:field="*{name}" placeholder="Enter Product Name">
+							</div>
+							<div class="row clearfix">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
+										<div class="form-line focused">
+											<input type="text" class="form-control"
+												th:field="*{quantity}" placeholder="Enter Quantity">
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<div class="form-group">
+										<div class="form-line">
+											<input type="text" class="form-control" th:field="*{price}"
+												placeholder="Enter Price">
+										</div>
+									</div>
+								</div>
+							</div>
+							<button type="submit"
+								class="btn btn-outline-dark text-black btn-sm btn-block">Submit</button>
+						</form>
+					</div>
+				</div>
+				<hr />
+				<h2>Product Table</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>NAME</th>
+							<th>QUANTITY</th>
+							<th>PRICE</th>
+							<th>ACTIONS</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="product: ${products}">
+							<td th:text="${product.id}"></td>
+							<td th:text=${product.name}></td>
+							<td th:text="${product.quantity}"></td>
+							<td th:text="${product.price}"></td>
+							<td><a th:href="@{/product/{id}(id=${product.id})}"><i
+									class="material-icons">edit</i></a> <a
+								th:href="@{/product/delete/{id}(id=${product.id})}"><i
+									class="material-icons">delete_forever</i></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</div>
+
+</body>
+</html>
